@@ -28,8 +28,13 @@
   </li>
 
   <li>
-    <strong>UserId:</strong>
-    <%= @account.user_id %>
+    <strong>Email:</strong>
+    <%= @account.user.email %>
+  </li>
+
+  <li>
+    <strong>Username:</strong>
+    <%= @account.user.username %>
   </li>
 
 </ul>

@@ -7,7 +7,7 @@ defmodule Catcaluser.AccountController do
   plug :action
 
   def index(conn, _params) do
-    accounts = Repo.all(Account)
+    accounts = get_all_accounts_with_user() # Repo.all(Account)
     render(conn, "index.html", accounts: accounts)
   end
 
@@ -31,7 +31,7 @@ defmodule Catcaluser.AccountController do
   end
 
   def show(conn, %{"id" => id}) do
-    account = Repo.get(Account, id)
+    account = get_account_with_user(id) # Repo.get(Account, id)
     render(conn, "show.html", account: account)
   end
 
@@ -64,4 +64,14 @@ defmodule Catcaluser.AccountController do
     |> put_flash(:info, "Account deleted successfully.")
     |> redirect(to: account_path(conn, :index))
   end
+
+  def get_all_accounts_with_user() do
+    Repo.all from(a in Account, preload: :user)
+  end
+
+  def get_account_with_user(id) do
+    Repo.get from(a in Account, preload: :user), id
+  end
+  
+  
 end

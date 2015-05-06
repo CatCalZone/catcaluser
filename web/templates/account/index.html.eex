@@ -8,7 +8,8 @@
       <th>City</th>
       <th>Zip</th>
       <th>Country</th>
-      <th>UserId</th>
+      <th>Email</th>
+      <th>Username</th>
 
       <th></th>
     </tr>
@@ -21,7 +22,8 @@
       <td><%= account.city %></td>
       <td><%= account.zip %></td>
       <td><%= account.country %></td>
-      <td><%= account.user_id %></td>
+      <td><%= account.user.email %></td>
+      <td><%= account.user.username %></td>
 
       <td class="text-right">
         <%= link "Show", to: account_path(@conn, :show, account), class: "btn btn-default btn-xs" %>
