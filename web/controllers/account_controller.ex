@@ -2,6 +2,7 @@ defmodule Catcaluser.AccountController do
   use Catcaluser.Web, :controller
 
   alias Catcaluser.Account
+  alias Catcaluser.User
 
   plug :scrub_params, "account" when action in [:create, :update]
   plug :action
@@ -72,6 +73,15 @@ defmodule Catcaluser.AccountController do
   def get_account_with_user(id) do
     Repo.get from(a in Account, preload: :user), id
   end
-  
+
+  @doc "Get all users which have not an account."
+  def get_free_users do
+    query = from u in User,
+      # join: a in Account,
+      select: {u.id, u.email} #,
+      # where: in(u.id, (from a in Account, select: a.user_id))
+    Repo.all query
+  end
+      
   
 end
