@@ -34,15 +34,14 @@
     <label>Country</label>
     <%= text_input f, :country, class: "form-control" %>
   </div>
-<!--
-  <div class="form-group">
-    <label>UserId</label>
-    <%= number_input f, :user_id, class: "form-control" %>
-  </div>
--->
+
   <div class="form-group">
     <label>User </label>
-    <%= select f, :user_id, Catcaluser.AccountController.get_free_users, prompt: "Choose user!" %>
+    <%= select f, :user_id, 
+      Catcaluser.AccountController.get_users_and_emails 
+      |> Enum.map(fn({id, n, e}) -> {id, "#{n} (#{e})"} end), 
+      prompt: "Choose the user!" 
+      %>
   </div>
 
 

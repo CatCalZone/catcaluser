@@ -75,11 +75,10 @@ defmodule Catcaluser.AccountController do
   end
 
   @doc "Get all users which have not an account."
-  def get_free_users do
+  def get_users_and_emails do
+    name = fn(u, e) -> "#u (#{e})" end
     query = from u in User,
-      # join: a in Account,
-      select: {u.id, u.email} #,
-      # where: in(u.id, (from a in Account, select: a.user_id))
+      select: {u.id, u.username, u.email}
     Repo.all query
   end
       
