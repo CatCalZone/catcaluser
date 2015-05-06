@@ -6,13 +6,13 @@ defmodule Catcaluser.User do
     field :username, :string
     field :hash, :string
     field :recovery_hash, :string
-    field :name, :string
+    field :password, :string, virtual: true
 
     timestamps
   end
 
-  @required_fields ~w(email username hash recovery_hash name)
-  @optional_fields ~w()
+  @required_fields ~w(email username )
+  @optional_fields ~w(hash recovery_hash)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
