@@ -29,7 +29,9 @@ defmodule Catcaluser.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.12"},
+    [{:phoenix_token_auth, github: "alfert/phoenix_token_auth", branch: "upgrade-to-phoenix-12"},# "~> 0.0.7"},
+     {:phoenix, "~> 0.12"},
+     {:ecto, "~> 0.11"},
      {:phoenix_ecto, "~> 0.3"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_live_reload, "~> 0.3"},
