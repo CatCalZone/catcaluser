@@ -16,8 +16,8 @@ defmodule Catcaluser.User do
   end
 
   @required_fields ~w(email username )
-  @optional_fields ~w(hashed_password, hashed_confirmation_token, 
-    confirmed_at, unconfirmed_email,authentication_tokens, hashed_password_reset_token)
+  @optional_fields ~w(hashed_password hashed_confirmation_token  
+    confirmed_at unconfirmed_email authentication_tokens hashed_password_reset_token)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
