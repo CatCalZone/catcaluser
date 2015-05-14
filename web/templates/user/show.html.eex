@@ -14,7 +14,32 @@
 
   <li>
     <strong>Password Hash:</strong>
-    <%= @user.hash %>
+    <%= @user.hashed_password %>
+  </li>
+
+  <li>
+    <strong>Confirmation Token (Hashed):</strong>
+    <%= @user.hashed_confirmation_token %>
+  </li>
+
+  <li>
+    <strong>Confirmed at:</strong>
+    <%= @user.confirmed_at %>
+  </li>
+
+  <li>
+    <strong>Reset Token (Hashed):</strong>
+    <%= @user.hashed_password_reset_token %>
+  </li>
+
+  <li>
+    <strong>Unconfirmed Email:</strong>
+    <%= @user.unconfirmed_email %>
+  </li>
+
+<li>
+    <strong>Authentication Tokens:</strong>
+    <%= @user.authentication_tokens %>
   </li>
 
 </ul>
