@@ -29,4 +29,8 @@ defmodule Catcaluser.User do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
+
+  def has_password(%__MODULE__{hashed_password: nil}), do: "no"
+  def has_password(%__MODULE__{hashed_password: ""}), do: "no"
+  def has_password(%__MODULE__{}), do: "yes"
 end

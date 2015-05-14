@@ -5,8 +5,7 @@
     <tr>
       <th>Email</th>
       <th>Username</th>
-      <th>Password</th>
-
+      <th>Has Password?</th>
       <th></th>
     </tr>
   </thead>
@@ -15,6 +14,7 @@
     <tr>
       <td><%= user.email %></td>
       <td><%= user.username %></td>
+      <td><%= Catcaluser.User.has_password(user) %> </td>
 
       <td class="text-right">
         <%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %>
