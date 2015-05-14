@@ -1,6 +1,6 @@
 defmodule Catcaluser.UserController do
   use Catcaluser.Web, :controller
-
+  require Logger
   alias Catcaluser.User
 
   plug :scrub_params, "user" when action in [:create, :update]
@@ -17,8 +17,8 @@ defmodule Catcaluser.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    changeset = User.changeset(%User{}, user_params)
-
+    changeset = # User.changeset(%User{}, user_params)
+        PhoenixTokenAuth.Registrator.changeset(user_params)
     if changeset.valid? do
       Repo.insert(changeset)
 
@@ -64,4 +64,12 @@ defmodule Catcaluser.UserController do
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: user_path(conn, :index))
   end
+
+  def confirm(conn, %{"id" => id}) do
+    Logger.debug "Confirm user #{id} ==> call now update!"
+    update(conn, %{"id" => id, 
+      "user" => %{:confirmed_at => Ecto.DateTime.local()}
+      })
+  end
+  
 end

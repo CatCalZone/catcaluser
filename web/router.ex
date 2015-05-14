@@ -18,6 +18,7 @@ defmodule Catcaluser.Router do
 
     get "/", PageController, :index
     resources "/users", UserController
+    post "/users/:id/confirm", UserController, :confirm
     resources "/accounts", AccountController
 
     # get "/login.html"

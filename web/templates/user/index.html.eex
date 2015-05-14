@@ -20,6 +20,7 @@
         <%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %>
         <%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, class: "btn btn-danger btn-xs" %>
+        <%= link "Confirm Now", to: user_path(@conn, :confirm, user), method: :post, class: "btn btn-default btn-xs" %>
       </td>
     </tr>
 <% end %>
