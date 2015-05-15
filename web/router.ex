@@ -1,5 +1,6 @@
 defmodule Catcaluser.Router do
   use Catcaluser.Web, :router
+  require PhoenixTokenAuth
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -11,6 +12,11 @@ defmodule Catcaluser.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
+
+  pipeline :authenticated do
+    plug PhoenixTokenAuth.Plug
+  end
+
 
   scope "/", Catcaluser do
     pipe_through :browser # Use the default browser stack
@@ -26,9 +32,13 @@ defmodule Catcaluser.Router do
     # post "/login"
   end
 
+  scope "/api" do
+    PhoenixTokenAuth.mount
+  end
+
   # Other scopes may use custom stacks.
   scope "/api", Catcaluser do
     pipe_through :api
-    resources "/users", UserJsController
+    get "/users", UserJsController, :index
   end
 end
