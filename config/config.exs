@@ -50,6 +50,11 @@ config :phoenix_token_auth,
   # when updating the account. This is the place to run custom validations.
   user_model_validator: fn changeset -> changeset end
 
+# Setting configuration for the Joken library
+config :joken, 
+  secret_key: "very secrect test keys",
+  json_module: PhoenixTokenAuth.PoisonHelper
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
