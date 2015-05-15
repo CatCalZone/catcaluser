@@ -17,6 +17,9 @@ defmodule Catcaluser.Endpoint do
   end
 
   plug Plug.Logger
+  plug CORSPlug, [origin: ["http://localhost:9000", "http://127.0.0.1:9000"]]
+  # plug PlugCors # ,  [origin: ["http://localhost:9000", "http://127.0.0.1:9000"]]
+
 
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
