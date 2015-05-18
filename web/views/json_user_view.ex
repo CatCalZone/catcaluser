@@ -5,7 +5,7 @@ defmodule Catcaluser.JsonUserView do
   alias Catcaluser.User
 
   def render("index.json", %{jsonusers: jsonusers}) do
-    IO.puts "Render may jsonusers: #{inspect jsonusers}"
+    # IO.puts "Render many jsonusers: #{inspect jsonusers}"
     %{data: render_many(jsonusers, "json_user.json")}
   end
 
