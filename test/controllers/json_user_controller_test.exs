@@ -25,11 +25,4 @@ defmodule Catcaluser.JsonUserControllerTest do
     }
   end
 
-  test "DELETE /jsonusers/:id", %{conn: conn} do
-    json_user = Repo.insert %User{}
-
-    conn = delete conn, IO.inspect(json_user_path(conn, :delete, json_user))
-    assert json_response(conn, 200)["data"]["id"]
-    refute Repo.get(User, json_user.id)
-  end
 end

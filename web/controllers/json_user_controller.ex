@@ -12,23 +12,13 @@ defmodule Catcaluser.JsonUserController do
   """
   def index(conn, _params) do
     jsonusers = Repo.all(User)
-      |> Enum.map fn %User{email: e, username: n, id: id} -> %{email: e, name: n, id: id} end
+      |> Enum.map &Catcaluser.JsonUser.from_user/1
     render(conn, "index.json", jsonusers: jsonusers)
   end
 
   def show(conn, %{"id" => id}) do
-    json_user = Repo.get(User, id)
+    json_user = Repo.get(User, id) |> Catcaluser.JsonUser.from_user
     render conn, "show.json", json_user: json_user
   end
 
-
-  def delete(conn, %{"id" => id}) do
-    json_user = Repo.get(User, id)
-    Logger.debug "Got #{inspect json_user} from DB"
-
-    json_user = Repo.delete(json_user)
-    Logger.debug "Deleted #{inspect json_user} from DB"
-    Logger.debug "will call render on show.json, #{inspect json_user}"
-    render(conn, "show.json", json_user: json_user)
-  end
 end
