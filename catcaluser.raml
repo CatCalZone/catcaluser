@@ -1,0 +1,43 @@
+#%RAML 0.8
+---
+title: CatCal.Zone User Management API
+baseUri: http://catcal.zone/api/{version}
+version: v1
+
+/users:
+  get: 
+    description: Returns the list of users
+    responses:
+      200: 
+      	body: 
+      	  application/json:
+
+  post:
+  	description: Creates a new user -- currently defunct due to missing mail infrastructure
+  /{user_id}: 
+    /confirm: 
+      description: Confirms that the user exists -- currently defunct
+    /account:
+      description: Manages the account data of the user 
+      get: 
+      post:
+      delete:  
+
+/session:
+  post: Starts a new session
+    body: 
+      application/json: 
+      	example: |
+        {email: "santa@north.pole", 
+         password: "secret"
+     	}
+    responses: 
+      201:
+        description: Session created, returning a JWT Token
+        body: 
+  delete: Logs out the user and cancels the session.
+  	headers: 
+  	  Authorization:
+  	    type: a string
+  	  	description: containing "Bearer ", followed by a JWT Token
+  	  	
