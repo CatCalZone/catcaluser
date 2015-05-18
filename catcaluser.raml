@@ -11,6 +11,18 @@ version: v1
       200: 
       	body: 
       	  application/json:
+      	    example: | 
+      	    {"data":[
+      	    	{"name":"fritz",
+      	    	 "id":2,
+      	    	 "email":"fritz@zuehlke.com"},
+      	    	{"name":"who_may_it_be",
+      	    	 "id":3,
+      	    	 "email":"unknown@zuehlke.com"},
+      	    	{"name":"kal",
+      	    	 "id":1,
+      	    	 "email":"kal@zuehlke.com"}
+      	    ]}
 
   post:
   	description: Creates a new user -- currently defunct due to missing mail infrastructure
@@ -40,4 +52,3 @@ version: v1
   	  Authorization:
   	    type: a string
   	  	description: containing "Bearer ", followed by a JWT Token
-  	  	
