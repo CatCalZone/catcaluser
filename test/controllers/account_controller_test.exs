@@ -2,12 +2,20 @@ defmodule Catcaluser.AccountControllerTest do
   use Catcaluser.ConnCase
 
   alias Catcaluser.Account
-  @valid_params account: %{address: "some content", city: "some content", country: "some content", name: "some content", user_id: 42, zip: "some content"}
+  alias Catcaluser.User
+  @valid_params account: %{address: "some address", city: "some city", 
+    country: "some country", name: "some name", # user_id: 42, 
+    zip: "some zip"}
   @invalid_params account: %{}
 
   setup do
     conn = conn()
     {:ok, conn: conn}
+  end
+
+  def valid_account(user_id) do
+    params = Dict.merge(@valid_params[:account], [user_id: user_id])
+    %{:account => params}
   end
 
   test "GET /accounts", %{conn: conn} do
@@ -21,7 +29,10 @@ defmodule Catcaluser.AccountControllerTest do
   end
 
   test "POST /accounts with valid data", %{conn: conn} do
-    conn = post conn, account_path(conn, :create), @valid_params
+    user = Repo.insert %User{}
+    acc = valid_account(user.id)
+    conn = post conn, account_path(conn, :create), acc 
+    assert html_response(conn, 200) =~ "Account created"
     assert redirected_to(conn) == account_path(conn, :index)
   end
 
@@ -31,7 +42,8 @@ defmodule Catcaluser.AccountControllerTest do
   end
 
   test "GET /accounts/:id", %{conn: conn} do
-    account = Repo.insert %Account{}
+    user = Repo.insert %User{}
+    account = Repo.insert %Account{user_id: user.id}
     conn = get conn, account_path(conn, :show, account)
     assert html_response(conn, 200) =~ "Show account"
   end
@@ -43,7 +55,8 @@ defmodule Catcaluser.AccountControllerTest do
   end
 
   test "PUT /accounts/:id with valid data", %{conn: conn} do
-    account = Repo.insert %Account{}
+    user = Repo.insert %User{}
+    account = Repo.insert %Account{user_id: user.id}
     conn = put conn, account_path(conn, :update, account), @valid_params
     assert redirected_to(conn) == account_path(conn, :index)
   end
