@@ -39,8 +39,9 @@ defmodule Catcaluser.Router do
   # Other scopes may use custom stacks.
   scope "/api", Catcaluser do
     pipe_through :api
-    resources "/users", JsonUserController , only: [:index, :show]
-    resources "/users/:user_id/account", AccountJsController, 
-      only: [:create, :delete, :show, :update ]
+    resources "/users", JsonUserController , only: [:index, :show] do
+      resources "/accounts", JsonAccountController, 
+        only: [:create, :delete, :show, :update, :index ]
+    end
   end
 end
