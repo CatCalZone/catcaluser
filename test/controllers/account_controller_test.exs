@@ -32,7 +32,6 @@ defmodule Catcaluser.AccountControllerTest do
     user = Repo.insert %User{}
     acc = valid_account(user.id)
     conn = post conn, account_path(conn, :create), acc 
-    assert html_response(conn, 200) =~ "Account created"
     assert redirected_to(conn) == account_path(conn, :index)
   end
 
