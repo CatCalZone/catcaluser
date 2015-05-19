@@ -7,7 +7,7 @@ defmodule Catcaluser.JsonAccountControllerTest do
   @valid_params account: %{address: "some address", city: "some city", 
     country: "some country", name: "some name", # user_id: 42, 
     zip: "some zip"}
-  @invalid_params json_account: %{}
+  @invalid_params account: %{}
 
   setup do
     conn = conn() |> put_req_header("accept", "application/json")
