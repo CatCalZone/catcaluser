@@ -35,8 +35,11 @@ defmodule Catcaluser.JsonAccountControllerTest do
   end
 
   test "POST /jsonaccounts with valid data", %{conn: conn} do
-    user = Repo.insert %User{}
-    conn = post conn, json_user_json_account_path(conn, :create, user.id), valid_account(user.id)
+    user = Repo.insert %User{email: "someone@some.where"}
+    acc = valid_account(user.id)
+    # IO.inspect acc
+    conn = post conn, 
+        json_user_json_account_path(conn, :create, user.id), acc
     assert json_response(conn, 200)["data"]["id"]
   end
 
