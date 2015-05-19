@@ -30,7 +30,9 @@ defmodule Catcaluser.JsonAccountControllerTest do
     json_account = Repo.insert %JsonAccount{user_id: user.id}
     conn = get conn, json_user_json_account_path(conn, :show, user.id, json_account)
     assert json_response(conn, 200)["data"] == %{
-      "id" => json_account.id
+      "id" => json_account.id, "address" => json_account.address, 
+      "city" => json_account.city, "country" => json_account.country, 
+      "name" => json_account.name, "zip" => json_account.zip
     }
   end
 

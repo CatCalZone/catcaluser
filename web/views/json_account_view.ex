@@ -16,7 +16,9 @@ defmodule Catcaluser.JsonAccountView do
     render("json_account.json", %{account: json_account})
   end
   def render("json_account.json", %{account: json_account}) do
-    %{id: json_account.id}
+    %{id: json_account.id, address: json_account.address, city: json_account.city, 
+      country: json_account.country, name: json_account.name, 
+      zip: json_account.zip}
   end
 
 end
