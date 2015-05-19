@@ -3,7 +3,7 @@ defmodule Catcaluser.JsonAccountController do
 
   alias Catcaluser.Account, as: JsonAccount
 
-  plug :scrub_params, "json_account" when action in [:create, :update]
+  plug :scrub_params, "account" when action in [:create, :update]
   plug :action
 
   def index(conn, _params) do
@@ -11,7 +11,7 @@ defmodule Catcaluser.JsonAccountController do
     render(conn, "index.json", jsonaccounts: jsonaccounts)
   end
 
-  def create(conn, %{"json_account" => json_account_params}) do
+  def create(conn, %{"account" => json_account_params}) do
     changeset = JsonAccount.changeset(%JsonAccount{}, json_account_params)
 
     if changeset.valid? do
@@ -29,7 +29,7 @@ defmodule Catcaluser.JsonAccountController do
     render conn, "show.json", json_account: json_account
   end
 
-  def update(conn, %{"id" => id, "json_account" => json_account_params}) do
+  def update(conn, %{"id" => id, "account" => json_account_params}) do
     json_account = Repo.get(JsonAccount, id)
     changeset = JsonAccount.changeset(json_account, json_account_params)
 
