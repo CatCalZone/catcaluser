@@ -5,7 +5,7 @@ notifications:
 otp_release:
   - 17.4
 env:
-  ELIXIR=v1.0.4
+  ELIXIR=v1.0.2
 before_script:
   - mix local.hex --force
   - mix local.rebar
