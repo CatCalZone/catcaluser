@@ -1,7 +1,7 @@
 # Catcaluser
 
-[![Build Status](https://travis-ci.org/catcalzone/catcaluser.svg?branch=master)](https://travis-ci.org/catcalzone/catcaluser)
-[![Inline docs](http://inch-ci.org/github/catcalzone/catcaluser.svg?branch=master&style=flat-square)](http://inch-ci.org/github/catcalzone/catcaluser)
+[![Build Status](https://travis-ci.org/CatCalZone/catcaluser.svg?branch=master)](https://travis-ci.org/CatCalZone/catcaluser)
+[![Inline docs](http://inch-ci.org/github/CatCalZone/catcaluser.svg?branch=master&style=flat-square)](http://inch-ci.org/github/CatCalZone/catcaluser)
 
 
 ## Generic Phoenix Instructions
