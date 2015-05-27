@@ -29,13 +29,15 @@ defmodule Catcaluser.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix_token_auth, "~> 0.0.8"}, #github: "alfert/phoenix_token_auth", branch: "upgrade-to-phoenix-12"},# "~> 0.0.7"},
+    [{:phoenix_token_auth, github: "alfert/phoenix_token_auth", branch: "config_wo_functions"},# "~> 0.0.10"},
      {:phoenix, "~> 0.12"},
      {:ecto, "~> 0.11"},
      {:phoenix_ecto, "~> 0.3"},
      {:postgrex, ">= 0.0.0"},
      {:cors_plug, "~> 0.1.2"},
      {:phoenix_live_reload, "~> 0.3.0"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"}, 
+     {:inch_ex, only: :docs},
+     {:exrm, "~> 0.16.0"}]
   end
 end
