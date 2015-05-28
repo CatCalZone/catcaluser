@@ -13,8 +13,17 @@ use Mix.Config
 # which you typically run after static files are built.
 config :catcaluser, Catcaluser.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "example.com"],
-  cache_static_manifest: "priv/static/manifest.json"
+  url: [host: "localhost"],
+  cache_static_manifest: "priv/static/manifest.json",
+  http: [port: 4001]
+
+# Configure your database
+config :catcaluser, Catcaluser.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "catcaluser_prod"
+
 
 # ## SSL Support
 #
@@ -48,4 +57,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"
