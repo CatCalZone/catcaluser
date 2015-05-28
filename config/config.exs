@@ -11,6 +11,7 @@ config :catcaluser, Catcaluser.Endpoint,
   root: Path.expand("..", __DIR__),
   secret_key_base: "wORXytHF+wnkpjK2Vog5mPZJYEigoJ8hGhHLpBhN1J45WrmxrS5gTNMpaExi84LE",
   debug_errors: false,
+  server: true, # play nicely with exrm ...
   pubsub: [name: Catcaluser.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
