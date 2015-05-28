@@ -18,7 +18,10 @@ defmodule Catcaluser.Mixfile do
   def application do
     [mod: {Catcaluser, []},
      applications: [:phoenix, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, 
+                    :phoenix_token_auth, 
+                    :cors_plug,
+                    :sasl]]
   end
 
   # Specifies which paths to compile per environment
@@ -35,7 +38,7 @@ defmodule Catcaluser.Mixfile do
      {:phoenix_ecto, "~> 0.3"},
      {:postgrex, ">= 0.0.0"},
      {:cors_plug, "~> 0.1.2"},
-     {:phoenix_live_reload, "~> 0.3.0"},
+     {:phoenix_live_reload, "~> 0.3.0", only: :dev},
      {:cowboy, "~> 1.0"}, 
      {:inch_ex, only: :docs},
      {:exrm, "~> 0.16.0"}]
