@@ -14,6 +14,11 @@ erl_crash.dump
 # comment this depending on your deployment strategy.
 /priv/static/css
 /priv/static/js
+# mix phoenix.digest moves the views etc also to web/static,
+# we ignore these directories
+/priv/static/views
+/priv/static/manifest.json
+
 
 # The config/prod.secret.exs file by default contains sensitive
 # data and you should not commit it into version control.
