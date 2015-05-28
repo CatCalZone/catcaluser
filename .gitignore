@@ -25,3 +25,6 @@ erl_crash.dump
 
 # Vagrant files
 /machines/.vagrant
+
+# generated releases are not under version control
+/rel
