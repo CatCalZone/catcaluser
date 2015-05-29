@@ -17,6 +17,7 @@ erl_crash.dump
 # mix phoenix.digest moves the views etc also to web/static,
 # we ignore these directories
 /priv/static/views
+/priv/static/images
 /priv/static/manifest.json
 
 
