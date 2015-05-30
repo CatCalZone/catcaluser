@@ -29,8 +29,9 @@ erl_crash.dump
 # variables.
 /config/prod.secret.exs
 
-# Vagrant files
+# Vagrant and Dockerfiles files
 /machines/.vagrant
+/machines/**/*.tar.gz
 
 # generated releases are not under version control
 /rel
