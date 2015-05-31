@@ -1,5 +1,6 @@
 defmodule Catcaluser do
   use Application
+  require Logger
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
@@ -18,7 +19,17 @@ defmodule Catcaluser do
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Catcaluser.Supervisor]
-    Supervisor.start_link(children, opts)
+    return_value = Supervisor.start_link(children, opts)
+
+    ########### 
+    ## Check for a production env var that requires migration
+    repo_env = Application.get_env(:catcaluser, Catcaluser.Repo)
+    if (repo_env |> Keyword.get(:auto_migrate, false)) do
+      migrate_database()
+    end
+    ###########
+    
+    return_value
   end
 
   # Tell Phoenix to update the endpoint configuration
