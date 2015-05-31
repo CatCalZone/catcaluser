@@ -23,6 +23,8 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 RUN apt-get update -y
+# Install postgres client libraries
+RUN apt-get install postgresql-client-9.3 -y
 
 # Set the environemnt variables for the catcal user
 # via INIT
