@@ -27,4 +27,27 @@ defmodule Catcaluser do
     Catcaluser.Endpoint.config_change(changed, removed)
     :ok
   end
+
+  @doc """
+  Migrates the database on system startup.
+  """
+  def migrate_database() do
+     Logger.info "Migrating the database"
+     repo = Mix.Ecto.ensure_started(Catcaluser.Repo)
+     mig_path = Application.app_dir(:catcaluser, "priv/repo/migrations")
+     Logger.info("Migrations Path is #{mig_path}")
+     :ok = case Ecto.Storage.up(repo) do
+      :ok ->
+        Logger.info "The database for #{inspect repo} has been created."
+        :ok
+      {:error, :already_up} ->
+        Logger.info "The database for #{inspect repo} has already been created."
+        :ok
+      {:error, term} ->
+        Logger.error "The database for #{inspect repo} couldn't be created, reason given: #{term}."
+        :error        
+    end
+    Ecto.Migrator.run(repo, mig_path, :up, [all: true, log: :info])
+  end
+  
 end
