@@ -20,9 +20,10 @@ config :catcaluser, Catcaluser.Endpoint,
 # Configure your database
 config :catcaluser, Catcaluser.Repo,
   adapter: Ecto.Adapters.Postgres,
-  host: "db", # this hostname is injected via Docker links
-  username: "postgres",
-  password: "postgres",
+  hostname: "db", # this hostname is injected via Docker links
+  auto_migrate: true,
+  username: "catcal",
+  password: "catcal",
   database: "catcaluser_prod"
 
 
