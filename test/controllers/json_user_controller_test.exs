@@ -5,12 +5,13 @@ defmodule Catcaluser.JsonUserControllerTest do
   alias Catcaluser.JsonUser
   @valid_email "some@email.zone"
   @valid_password "big secret"
+  @valid_name "some name"
   @valid_params json_user: %{email: @valid_email, password: @valid_password, 
-    username: "some name"}
+    username: @valid_name}
   @invalid_params json_user: %{}
 
   setup do
-    jwt = login(@valid_email, @valid_password)
+    jwt = login(@valid_email, @valid_password, @valid_name)
     conn = conn() 
       |> put_req_header("accept", "application/json")
     auth_conn = conn() 
@@ -18,13 +19,6 @@ defmodule Catcaluser.JsonUserControllerTest do
       |> put_req_header("authorization", "Bearer #{jwt}")
     {:ok, %{conn: conn, auth_conn: auth_conn}}
   end
-
-  ###################
-  #######
-  ####### we need tokens to authorize the request - or change the test-config
-  ####### in a way, that needs tokens here. But we should test it somehow!
-  #######
-  ####################
 
   # GET is the only request which is handled by 
   test "GET /jsonusers without authorization fails", %{conn: conn} do
@@ -35,7 +29,8 @@ defmodule Catcaluser.JsonUserControllerTest do
   # GET is the only request which is handled by 
   test "GET /jsonusers", %{auth_conn: conn} do
     conn = get conn, json_user_path(conn, :index)
-    assert json_response(conn, 200)["data"] == []
+    login_user = Repo.get_by(User, email: @valid_email)
+    assert json_response(conn, 200)["data"] == [map_to_json(login_user)]
   end
 
 
@@ -44,12 +39,14 @@ defmodule Catcaluser.JsonUserControllerTest do
     user2 = Repo.insert %User{email: "user2@mail.org"}
 
     conn = get conn, json_user_path(conn, :index)
+    login_user = Repo.get_by(User, email: @valid_email)
+
     assert json_response(conn, 200)["data"] |> is_list
 
     data = json_response(conn, 200)["data"]
-    assert length(data) == 2
+    assert length(data) == 3
     # IO.inspect data
-    [user1, user2] 
+    [user1, user2, login_user] 
       |> Enum.map(&JsonUser.from_user/1)
       # |> Enum.map(&(Catcaluser.JsonUserView.render("json_user.json", %{json_user: &1}) ))
       |> Enum.map(&map_to_json/1)
@@ -78,12 +75,12 @@ defmodule Catcaluser.JsonUserControllerTest do
   @doc """
   Creates the user and does a login, return the token
   """
-  def login(email, password) do
+  def login(email, password, name) do
     login_user = PhoenixTokenAuth.Registrator.changeset(
         %{email: email, password: password})
       |> Repo.insert
     login_user 
-      |> User.changeset(%{confirmed_at: Ecto.DateTime.local(), username: email})
+      |> User.changeset(%{confirmed_at: Ecto.DateTime.local(), username: name})
       |> Repo.update
       # |> IO.inspect
     {:ok, token} = PhoenixTokenAuth.Authenticator.authenticate(email, password)
