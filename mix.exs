@@ -40,6 +40,7 @@ defmodule Catcaluser.Mixfile do
      {:cors_plug, "~> 0.1.2"},
      {:phoenix_live_reload, "~> 0.3.0", only: :dev},
      {:cowboy, "~> 1.0"}, 
+     {:timex, "~>0.13.4", only: :test},
      {:inch_ex, only: :docs},
      {:exrm, "~> 0.16.0"}]
   end
