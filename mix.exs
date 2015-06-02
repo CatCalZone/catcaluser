@@ -3,7 +3,7 @@ defmodule Catcaluser.Mixfile do
 
   def project do
     [app: :catcaluser,
-     version: "0.0.1-dev",
+     version: "0.0.1",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
