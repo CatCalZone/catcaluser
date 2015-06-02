@@ -15,3 +15,5 @@ script: "MIX_ENV=test mix do deps.get, deps.compile, test"
 after_script:
   - MIX_ENV=docs mix deps.get
   - MIX_ENV=docs mix inch.report
+notifications:
+  slack: zuehlke:kDdWfWR1yjyNvVJeAVkrasHn
