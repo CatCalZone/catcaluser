@@ -12,8 +12,8 @@ before_script:
   - mix local.hex --force
   - mix local.rebar
 script: "MIX_ENV=test mix do deps.get, deps.compile, test"
-after_script:
-  - MIX_ENV=docs mix deps.get
-  - MIX_ENV=docs mix inch.report
+# after_script:
+#   - MIX_ENV=docs mix deps.get
+#   - MIX_ENV=docs mix inch.report
 notifications:
   slack: zuehlke:kDdWfWR1yjyNvVJeAVkrasHn
