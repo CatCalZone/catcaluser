@@ -11,7 +11,9 @@ defmodule Catcaluser.JsonUserControllerTest do
   @invalid_params json_user: %{}
 
   setup do
-    jwt = login(@valid_email, @valid_password, @valid_name)
+    Catcaluser.LoginSupport.create_confirmed_user(@valid_email, 
+      @valid_password, @valid_name)
+    jwt = Catcaluser.LoginSupport.create_session(@valid_email, @valid_password)
     conn = conn() 
       |> put_req_header("accept", "application/json")
     auth_conn = conn() 
@@ -71,22 +73,5 @@ defmodule Catcaluser.JsonUserControllerTest do
   def map_to_json(json_user = %{username: n}) do
     %{"id" => json_user.id, "email" => json_user.email, "name" => n}
   end
-
-  @doc """
-  Creates the user and does a login, return the token
-  """
-  def login(email, password, name) do
-    login_user = PhoenixTokenAuth.Registrator.changeset(
-        %{email: email, password: password})
-      |> Repo.insert
-    login_user 
-      |> User.changeset(%{confirmed_at: Ecto.DateTime.local(), username: name})
-      |> Repo.update
-      # |> IO.inspect
-    {:ok, token} = PhoenixTokenAuth.Authenticator.authenticate(email, password)
-    #u = Repo.get(User, login_user.id) |> IO.inspect
-    #assert token == hd(u.authentication_tokens)
-    token
-  end  
 
 end
