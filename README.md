@@ -39,7 +39,7 @@ be build with the `build-docker.sh` script.
 
 Generate a new release from source with `MIX_ENV=prod mix release`. After
 that, simply run `build-docker.sh` to create a fresh Docker image from the
-generated release in `/rel/catcaluser.
+generated release in `/rel/catcaluser`.
 
 ### Download a binary relase for the docker image
 
