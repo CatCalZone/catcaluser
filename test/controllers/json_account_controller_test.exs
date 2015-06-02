@@ -9,9 +9,20 @@ defmodule Catcaluser.JsonAccountControllerTest do
     zip: "some zip"}
   @invalid_params account: %{}
 
+  @valid_email "some@email.zone"
+  @valid_password "big secret"
+  @valid_name "some name"
+
   setup do
-    conn = conn() |> put_req_header("accept", "application/json")
-    {:ok, conn: conn}
+    Catcaluser.LoginSupport.create_confirmed_user(@valid_email, 
+      @valid_password, @valid_name)
+    jwt = Catcaluser.LoginSupport.create_session(@valid_email, @valid_password)
+    conn = conn() 
+      |> put_req_header("accept", "application/json")
+    auth_conn = conn() 
+      |> put_req_header("accept", "application/json")
+      |> put_req_header("authorization", "Bearer #{jwt}")
+    {:ok, %{conn: conn, auth_conn: auth_conn}}
   end
 
   def valid_account(user_id) do
@@ -19,13 +30,13 @@ defmodule Catcaluser.JsonAccountControllerTest do
     %{:account => params}
   end
 
-  test "GET /jsonaccounts", %{conn: conn} do
+  test "GET /jsonaccounts", %{auth_conn: conn} do
     user = Repo.insert %User{}
     conn = get conn, json_user_json_account_path(conn, :index, user.id)
     assert json_response(conn, 200)["data"] == []
   end
 
-  test "GET /jsonaccounts/:id", %{conn: conn} do
+  test "GET /jsonaccounts/:id", %{auth_conn: conn} do
     user = Repo.insert %User{}
     json_account = Repo.insert %JsonAccount{user_id: user.id}
     conn = get conn, json_user_json_account_path(conn, :show, user.id, json_account)
@@ -36,7 +47,7 @@ defmodule Catcaluser.JsonAccountControllerTest do
     }
   end
 
-  test "POST /jsonaccounts with valid data", %{conn: conn} do
+  test "POST /jsonaccounts with valid data", %{auth_conn: conn} do
     user = Repo.insert %User{email: "someone@some.where"}
     acc = valid_account(user.id)
     # IO.inspect acc
@@ -45,27 +56,27 @@ defmodule Catcaluser.JsonAccountControllerTest do
     assert json_response(conn, 200)["data"]["id"]
   end
 
-  test "POST /jsonaccounts with invalid data", %{conn: conn} do
+  test "POST /jsonaccounts with invalid data", %{auth_conn: conn} do
     user = Repo.insert %User{}
     conn = post conn, json_user_json_account_path(conn, :create, user.id), @invalid_params
     assert json_response(conn, 422)["errors"] != %{}
   end
 
-  test "PUT /jsonaccounts/:id with valid data", %{conn: conn} do
+  test "PUT /jsonaccounts/:id with valid data", %{auth_conn: conn} do
     user = Repo.insert %User{}
     json_account = Repo.insert %JsonAccount{user_id: user.id}
     conn = put conn, json_user_json_account_path(conn, :update, user.id, json_account), @valid_params
     assert json_response(conn, 200)["data"]["id"]
   end
 
-  test "PUT /jsonaccounts/:id with invalid data", %{conn: conn} do
+  test "PUT /jsonaccounts/:id with invalid data", %{auth_conn: conn} do
     user = Repo.insert %User{}
     json_account = Repo.insert %JsonAccount{user_id: user.id}
     conn = put conn, json_user_json_account_path(conn, :update, user.id, json_account), @invalid_params
     assert json_response(conn, 422)["errors"] != %{}
   end
 
-  test "DELETE /jsonaccounts/:id", %{conn: conn} do
+  test "DELETE /jsonaccounts/:id", %{auth_conn: conn} do
     user = Repo.insert %User{}
     json_account = Repo.insert %JsonAccount{user_id: user.id}
     conn = delete conn, json_user_json_account_path(conn, :delete, user.id, json_account)
