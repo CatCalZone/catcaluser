@@ -32,3 +32,9 @@ config :catcaluser, Catcaluser.Repo,
   username: "postgres",
   password: "postgres",
   database: "catcaluser_dev"
+
+config :eurexa, 
+  eureka_server: "127.0.0.1",
+  eureka_port: 8761,
+  eureka_prefix: "/",
+  eureka_version: 2
