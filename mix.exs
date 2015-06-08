@@ -20,6 +20,7 @@ defmodule Catcaluser.Mixfile do
      applications: [:phoenix, :cowboy, :logger,
                     :phoenix_ecto, :postgrex, 
                     :phoenix_token_auth, 
+                    :eurexa,
                     :cors_plug,
                     :sasl]]
   end
@@ -33,6 +34,8 @@ defmodule Catcaluser.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [{:phoenix_token_auth, github: "alfert/phoenix_token_auth", branch: "config_wo_functions"},# "~> 0.0.10"},
+     {:eurexa, path: "../eurexa"},
+     {:poison, "~> 1.4.0", override: true},
      {:phoenix, "~> 0.12"},
      {:ecto, "~> 0.11"},
      {:phoenix_ecto, "~> 0.3"},
