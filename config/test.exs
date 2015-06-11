@@ -17,3 +17,9 @@ config :catcaluser, Catcaluser.Repo,
   database: "catcaluser_test",
   size: 1,
   max_overflow: 0
+
+config :eurexa, 
+  eureka_server: "127.0.0.1",
+  eureka_port: 8761,
+  eureka_prefix: "/",
+  eureka_version: 2
