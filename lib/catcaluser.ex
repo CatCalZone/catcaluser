@@ -14,13 +14,14 @@ defmodule Catcaluser do
       worker(Catcaluser.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(Catcaluser.Worker, [arg1, arg2, arg3]),
-      worker(Eurexa.EurexaServer, ["catcaluser"])
     ]
+
+    eurexa = Eurexa.workers :catcaluser
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Catcaluser.Supervisor]
-    return_value = Supervisor.start_link(children, opts)
+    return_value = Supervisor.start_link(eurexa ++ children, opts)
 
     ########### 
     ## Check for a production env var that requires migration
