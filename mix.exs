@@ -33,8 +33,8 @@ defmodule Catcaluser.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix_token_auth, github: "alfert/phoenix_token_auth", branch: "config_wo_functions"},# "~> 0.0.10"},
-     {:eurexa, path: "../eurexa"},
+    [{:phoenix_token_auth, "~> 0.0.14"}, # github: "alfert/phoenix_token_auth", branch: "config_wo_functions"},
+     {:eurexa, github: "catcalzone/eurexa", tag: "v0.0.1"},
      {:poison, "~> 1.4.0", override: true},
      {:phoenix, "~> 0.13"},
      {:ecto, "~> 0.11"},
@@ -46,6 +46,7 @@ defmodule Catcaluser.Mixfile do
      {:cowboy, "~> 1.0"}, 
      {:timex, "~>0.13.4", only: :test},
      {:inch_ex, only: :docs},
-     {:exrm, "~> 0.16.0"}]
+     {:exrm, "~> 0.16.0"}, 
+     {:relx, github: "erlware/relx"}]
   end
 end
