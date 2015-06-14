@@ -21,6 +21,7 @@ defmodule Catcaluser.Mixfile do
                     :phoenix_ecto, :postgrex, 
                     :phoenix_token_auth, 
                     :eurexa,
+                    :exometer,
                     :cors_plug,
                     :sasl]]
   end
@@ -43,6 +44,11 @@ defmodule Catcaluser.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:cors_plug, "~> 0.1.2"},
      {:phoenix_live_reload, "~> 0.4.0", only: :dev},
+     # exometer from PSDPFKit, better suited for mix
+     {:exometer_core, github: "PSPDFKit-labs/exometer_core", override: true},
+     {:exometer, github: "PSPDFKit-labs/exometer"},
+     {:edown, github: "uwiger/edown", tag: "0.5", override: true},
+     # 
      {:cowboy, "~> 1.0"}, 
      {:timex, "~>0.13.4", only: :test},
      {:inch_ex, only: :docs},
