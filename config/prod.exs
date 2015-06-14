@@ -27,6 +27,12 @@ config :catcaluser, Catcaluser.Repo,
   database: "catcaluser_prod"
 
 
+config :eurexa, :catcaluser,
+  eureka_server: "discoveryservice",
+  eureka_port: 8761,
+  eureka_prefix: "/",
+  eureka_version: 2
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

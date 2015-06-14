@@ -20,6 +20,7 @@ defmodule Catcaluser.Mixfile do
      applications: [:phoenix, :cowboy, :logger,
                     :phoenix_ecto, :postgrex, 
                     :phoenix_token_auth, 
+                    :eurexa,
                     :cors_plug,
                     :sasl]]
   end
@@ -32,16 +33,20 @@ defmodule Catcaluser.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix_token_auth, github: "alfert/phoenix_token_auth", branch: "config_wo_functions"},# "~> 0.0.10"},
-     {:phoenix, "~> 0.12"},
+    [{:phoenix_token_auth, "~> 0.0.14"}, # github: "alfert/phoenix_token_auth", branch: "config_wo_functions"},
+     {:eurexa, github: "catcalzone/eurexa", tag: "v0.0.1"},
+     {:poison, "~> 1.4.0", override: true},
+     {:phoenix, "~> 0.13"},
      {:ecto, "~> 0.11"},
-     {:phoenix_ecto, "~> 0.3"},
+     {:phoenix_ecto, "~> 0.4"},
+     {:phoenix_html, "~> 1.0"},
      {:postgrex, ">= 0.0.0"},
      {:cors_plug, "~> 0.1.2"},
-     {:phoenix_live_reload, "~> 0.3.0", only: :dev},
+     {:phoenix_live_reload, "~> 0.4.0", only: :dev},
      {:cowboy, "~> 1.0"}, 
      {:timex, "~>0.13.4", only: :test},
      {:inch_ex, only: :docs},
-     {:exrm, "~> 0.16.0"}]
+     {:exrm, "~> 0.16.0"}, 
+     {:relx, github: "erlware/relx"}]
   end
 end
