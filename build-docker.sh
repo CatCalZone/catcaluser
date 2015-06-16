@@ -1,6 +1,6 @@
 #!/bin/bash
 # set -x
-VERSION=0.1.0
+VERSION=1.0.0
 URL=https://github.com/CatCalZone/catcaluser/releases/download/v$VERSION/catcaluser-$VERSION.tar.gz
 
 DEST=machines/phoenix/catcaluser.tar.gz
