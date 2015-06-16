@@ -16,6 +16,7 @@ defmodule Catcaluser.Endpoint do
     plug Phoenix.CodeReloader
   end
 
+  plug CatCalUser.PlugExometer
   plug Plug.Logger
   plug CORSPlug, [origin: "http://localhost:9000"]
 

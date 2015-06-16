@@ -26,6 +26,15 @@ config :catcaluser, Catcaluser.Repo,
   password: "catcal",
   database: "catcaluser_prod"
 
+config :exometer, 
+  reporters:
+    [
+      exometer_report_statsd:
+      [
+        hostname: 'grafana',
+        port: 8125
+      ],
+    ]
 
 config :eurexa, :catcaluser,
   eureka_server: "discoveryservice",
