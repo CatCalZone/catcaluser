@@ -45,9 +45,10 @@ config :joken,
   secret_key: "very secrect test keys",
   json_module: PhoenixTokenAuth.PoisonHelper
 
-# Import environment specific config. This must remain at the bottom
-# of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
 
 # Monitoring with exometer
 import_config "exometer.exs"
+
+# Import environment specific config. This must remain at the bottom
+# of this file so it overrides the configuration defined above.
+import_config "#{Mix.env}.exs"
